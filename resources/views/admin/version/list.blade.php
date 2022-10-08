@@ -26,7 +26,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="box">
           <div class="box-header with-border">
-            <span class="font-20 box-title">Versions</span> 
+            <span class="font-20 box-title">Versions</span>
             <a href="{{ route('version.add')}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</a>
           </div>
           <div class="box-body">
@@ -90,12 +90,12 @@
                             '<a href="/admin/version/delete/'+row['id']+'" title="Edit" class="btn btn-danger mr-1 font-15 deleteversion"><i class="fa fa-trash-o"></i></a>';
                     }
                 }
-            ]    
+            ]
 
         });
- 
 
-  
+
+
 </script>
 @endsection
 @section('css')

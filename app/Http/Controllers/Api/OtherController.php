@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\CurrencyResource;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -19,12 +20,12 @@ class OtherController extends Controller
         $categories->prepend($fnc);
         return response()->json(['result' => 1,"categories" => $categories ]);
     }
- 
+
     public function getallcurrencies() {
         $currencies = \App\Currency::get();
-        return response()->json(['result' => 1,"currencies" => $currencies ]);
+        return response()->json(['result' => 1,"currencies" => CurrencyResource::collection($currencies) ]);
     }
- 
+
 
     public function getfavouriteCompanies(Request $request) {
         $favoriteCompanies    = Auth()->user()->favoriteCompanies;
@@ -35,7 +36,7 @@ class OtherController extends Controller
         $cs = \DB::table('settings')->where('control_settings','PAYMENT MANDATORY')->first();
         return response()->json(['result' => 1,"data" => $cs ]);
     }
-    
+
     public function getversionhistiry() {
         $versions = \App\Version::latest()->get();
         return response()->json(['result' => 1,"versions" => $versions ]);
@@ -50,7 +51,7 @@ class OtherController extends Controller
         $reasons = \App\Reason::select("id","title")->get();
        return response()->json(['result' => 1,"reasons" => $reasons ]);
     }
-    
+
     public function getFaq() {
         $faqs = \App\Faq::select("question","answer")->get();
        return response()->json(['result' => 1,"faqs" => $faqs ]);
@@ -67,7 +68,7 @@ class OtherController extends Controller
             'email' => 'required',
             'message' => 'required',
             ]);
-      
+
         if ($validator->fails()){
               return response()->json(['result' => '0',"message"=>"Validation error",'errors' => $validator->errors()->messages()]);
         }
@@ -80,12 +81,12 @@ class OtherController extends Controller
         $contact->email = $request->email;
         $contact->message   = $request->message;
         $contact->save();*/
-        
+
         \Mail::send('emails.contactus',['contact'=>$contact] , function($message) {
            $message->to('inquiry@afrobizfind.com', 'Afrobiz find')
            ->subject('Contact us message on Afrobizfind ');
         });
         return response()->json(['result' => 1,"message" => "Thank you for the message, We will contact you back soon"]);
     }
-    
+
 }

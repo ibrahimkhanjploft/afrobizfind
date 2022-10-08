@@ -18,13 +18,13 @@
   </head>
 
   <body>
- 
+
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
       <h5 class="my-0 mr-md-auto font-weight-normal">Afrobizfind</h5>
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="{{ url('privacypolicy') }}">Tearms and condition</a>
       </nav>
-     </div> 
+     </div>
 
     <div class="pricing-header px-3 py-3 --pt-md-5-- pb-md-4 mx-auto text-center">
       <h1 class=""><img src="{{ asset('img.png')}}"></h1>
@@ -32,9 +32,9 @@
     </div>
 
     <div class="container">
-        
 
-      
+
+
     </div>
 
 
@@ -47,6 +47,6 @@
      <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/holder.min.js') }}"></script> -->
-   
+
   </body>
 </html>

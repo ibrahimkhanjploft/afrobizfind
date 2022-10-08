@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/ 
+*/  
 Route::post('login', 'Api\Auth\LoginController@login');
 Route::post('register', 'Api\Auth\LoginController@register');
 // Route::post('forgotpassword', 'Api\Auth\ForgotpassController@sendResetLinkEmail');
@@ -34,6 +34,9 @@ Route::post('neabycompanies', 'Api\IndexController@neabycompanies');//Not in use
 
 
 Route::group(['middleware' => 'jwt.auth'], function() { 
+
+    Route::post('payment', 'Api\StripeController@payment')->name('payment');
+
     Route::post('changepassword', 'Api\Auth\ForgotpassController@changepassword');
     Route::post('getcompanydetail', 'Api\IndexController@getcompanydetail');
 

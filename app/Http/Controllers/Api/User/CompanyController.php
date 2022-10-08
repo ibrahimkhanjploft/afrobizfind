@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use Auth;
 use Validator;
 use App\Company;
+use App\Currency;
 use App\CompanyImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Controller;
@@ -59,12 +60,13 @@ class CompanyController extends Controller
             // 'country '        => 'required',
             'telephone'       => 'required',
             'website'         => 'required',
+            'currency_id'     => 'required',
          ]);
       
         if ($validator->fails()){
               return response()->json(['result' => 0, 'message' => "Validation error",'errors' => $validator->errors()->messages()]);
         }
-      
+        \Log::emergency( $request->all());
         $user = Auth()->user();
         $user_id = $user->id;
         if($request->id) {
@@ -77,7 +79,7 @@ class CompanyController extends Controller
         if(!isset($company)) {
              return response()->json(['result' => 0, 'message' => "Something went wrong"]);
         }
-
+        $currency = Currency::find($request->currency_id);
         $company->user_id         = Auth::user()->id;
         $company->category_id     = $request->category_id;
         $company->country         = $request->country;
@@ -107,6 +109,8 @@ class CompanyController extends Controller
         $company->long       = $request->long;
         $company->ethos       = $request->ethos;
         $company->applink       = $request->applink;
+        $company->currency_id       = $request->currency_id;
+        $company->price       = $currency->country_price;
         
         if ($request->hasFile('image')) {
             $image     = $request->image;
